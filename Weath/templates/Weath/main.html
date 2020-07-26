@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WeatherApp</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+</head>
+<body>
+
+        <div class="jumbotron">
+            <h2>What's the weather today?</h2>
+        </div>
+        <div class="container">
+            <form method = "POST">
+                {% csrf_token %}
+                {{form.r}}
+                <button type="submit" class="btn btn-lg btn-primary btn-block">Submit</button>
+            </form>
+            {% if info%}
+            <div class = 'alert alert-info mt-2'>
+                <h2>{{ info.city }}:</h2>
+                <h3>Weather:   {{ info.weath }}:  {{ info.desc }}</h3>
+                <h4>Temperature: {{ info.temp }}</h4>
+                </div>
+            {% endif %}
+            
+        </div>
+</body>
+</html>
