@@ -22,7 +22,7 @@ def index(request):
         if countt(reqq,',')==0:
             url  = f'http://api.openweathermap.org/data/2.5/weather?q={reqq}&appid=5f6c687f2ff84ba78c36f5bbc28d5e38'
             r = requests.get(url).json()
-            tempp = int(r['main']['temp'])-273
+            tempp = str(int(r['main']['temp'])-273)
             diicc = {
                 'city':url[url.find('=')+1:url.find('&')],
                 'weath':r['weather'][0]['main'],
@@ -35,9 +35,9 @@ def index(request):
             ind = reqq.find(',')
             url = f'http://api.openweathermap.org/data/2.5/weather?q={reqq[:ind]},{reqq[ind+1:len(reqq)]}&appid=5f6c687f2ff84ba78c36f5bbc28d5e38'
             r = requests.get(url).json()
-            tempp = int(r['main']['temp'])-273
+            tempp = str(int(r['main']['temp'])-273)
             diicc = {
-                'city':url[url.find('=')+1:url.find(',')],
+                'city':url[url.find('=')+1:url.find('&')],
                 'weath':r['weather'][0]['main'],
                 'desc':r['weather'][0]['description'],
                 'temp':tempp
@@ -49,12 +49,12 @@ def index(request):
             ind1 = reqq.rfind(',')
             url =  f'http://api.openweathermap.org/data/2.5/weather?q={reqq[:ind]},{reqq[ind+1:ind1]},{reqq[ind1+1:len(reqq)]}&appid=5f6c687f2ff84ba78c36f5bbc28d5e38'
             r = requests.get(url).json()
-            tempp = int(r['main']['temp'])-273
+            tempp = str(int(r['main']['temp'])-273)
             diicc = {
-                'city':url[url.find('=')+1:url.find(',')],
+                'city':url[url.find('=')+1:url.find('&')],
                 'weath':r['weather'][0]['main'],
                 'desc':r['weather'][0]['description'],
-                'temp':r['main']['temp']
+                'temp':tempp
             }
             context.update({'info':diicc})
             return render(request, 'Weath/main.html', context)
